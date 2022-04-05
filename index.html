@@ -2768,6 +2768,7 @@ observerBackOn: "0g0glEĊY-ŊYåŎY÷-ZÒþHVVHÞÒYïĞZ(ĪWwíWEJH)ĺH;ŚZ?4W;
 observerSideSW: "0g0gc-ŊYEĊY;ŚZ?4W)ĺHwíWÒþHåŎY(ĪWVVH÷-ZEJH0gzOy?h16ÝOyQ?ðÞ9ĉzOO#òĉ9ĉ)zA_9ÞnĈOON#6ĉnĈOyA_9Ĉ7ÝOOOB9ÝmÝROA?6Ý6KOyOBmĈ9KOOy?nĈ6KONA?ñĉ9ÝzOO*ñĉ9ÞROA_7ĉmÝOOO#6ĉ6KOAQ_ðÞ01yO)_g1",
 redDye: "0g0g7000ëċHäßHĸjZõûZŔĞWĐĜH000000000000000000001S000i_Iw00ľ%Þ)00ĤŊĹĽë0pÌþÈë0ŁŃĝŃë0ĽśĖ;ë0ĥČÛÕë0FrøQ005Ćāw000J]00000000000000",
 string: "0g0g4000łÚYŞņH%kH0000004000&000j000.00ëfë1ħ0ķb6K-4Lŝ4e)f]3Ü2ī0ŝÔ$0fţÝ00ōħ00W00000",
+yellowDye: "0g0gÆ000ĖQYĚÑZıŘYĊQYĖQZĊ3WĎzYņ+YŊíYòĨZĎAWúĘHĶ1HľMYıĩZłRWöŉHĖQHĖwZņ@Yņ2ZıĉYłMZĩìHĖxHúŊYĚÑYĶ1YŊÏHıĊZĦÎYłNWŁřWĦÁHĭìYïęZĚUYł1ZĭJWŊÄHŊÏZŁŘYĩÞYľxZĂ2WĎjYł+HŒûHĩÞWĵĉZł2WĦÎHņRWŁŘZýŚZúĘYņÂZĭęZłNHĭúYĵęHĩÞHŎJHıúYìúWāŉWĭúHŒãZĽĹYĦÁWĹĨZĩÎHöĹYĂ3HĩßHĽĨZĹęYĵĉYāřZúŚYìúHıúZĹęZòęYòĩYåÝZïĉZ00000000000000000000000000000000000000g000000000000g(ë000000005csSúS00000005õq-å2w0000004òü!ÆġîCë00003ÔeĆ=ìaAÖ00002ÃòûĐÂđÈĬĈ0001ßŝcÇ(ÓĸēÐ%ħ001Īÿ}Ņ<èļŢŏgS002k*Þyĭëř;ñJS0004ďĹō|é.hòŇ00000akÖ)Ò}čÀ00000000!ĽîÊ0000000000000000000",
 //pretty: "0g0g40001blc009d4hc009efw01ulak1c3300022112200033333022111122033303332112211233300033312222133300022333222233322022113330033311222112233333322112112220333302221111222033330222112112233333322112221133300333112202233322223332200033312222133300033321122112333033302211112203333300222112200033",
 //pigFace: "0g0gr000006w14172ew1hejb3s1heul881luzbw81lvx4oo1o2w1dk1qb44541qbfcoo1sj0ws81sjc3qw1sjc5bs1sjndvc1sjnfg81sjynzs1sjypko1sk9y481skl9tk1ur8we01urk6ig1urvf201urvgmw1urvi7s1us6p6g1us6qrc1ustb081x2x0xkaa669999ddddbbddaa669999ddddbbdd7766ccii99kknnnn7766ccii99kknnnn88cceeeeddddeenn88cceeeeddddeenn00qqbbbbjjjjqq0000qqbbbbjjjjqq0099ddhhppppppggdd99ddhhppppppggddcccc11ddff11llllcccc11ddff11llll999922335544oomm999922335544oommbbbbddeellffffnnbbbbddeellffffnn",
 /*
@@ -3259,6 +3260,7 @@ solid:false,
 shadow: false,
 portal: true,
 transparent:true,
+pane:true,
 lightLevel: 11,
 ontouch: function(){
 touchingPortal = true
@@ -4323,11 +4325,13 @@ item: true,
 onuse: (x,y,z, block, replaceItem, useDurability) => {
 if(block === blockIds.tnt){
 blockData[blockIds.tnt].explode(x,y,z)
-}else if(block === (blockIds.tnt | SLAB)){
-blockData[blockIds.tnt].superTntExplode(x,y,z)
 }else{
 var pos = getPosition()
+if (world.getBlock(pos[0]-1,pos[1],pos[2]) === blockIds.obsidian || world.getBlock(pos[0]+1,pos[1],pos[2]) === blockIds.obsidian || world.getBlock(pos[0],pos[1],pos[2]-1) === blockIds.obsidian || world.getBlock(pos[0],pos[1],pos[2]+1) === blockIds.obsidian) {
+world.setBlock(pos[0],pos[1],pos[2],blockIds.portal)
+} else {
 world.setBlock(pos[0],pos[1],pos[2],blockIds.fire)
+}
 useDurability(1)
 playSound("block.fire.ignite",0,posSound(x,y,z))
 if(multiplayer) send({type:"playSound", data:"block.fire.ignite", x:x,y:y,z:z})
@@ -8957,6 +8961,11 @@ name:"redDye",
 Name:"Red Dye",
 item:true
 },
+{
+name:"yellowDye",
+Name:"Yellow Dye",
+item:true
+},
 /*
 { name: "pigFace" },
 { 
@@ -9221,6 +9230,7 @@ const crafts = {
 "junglePlanks,junglePlanks,junglePlanks,air,stick,air,air,stick":{name:"woodenPickaxe"},
 "darkOakPlanks,darkOakPlanks,darkOakPlanks,air,stick,air,air,stick":{name:"woodenPickaxe"},
 "acaciaPlanks,acaciaPlanks,acaciaPlanks,air,stick,air,air,stick":{name:"woodenPickaxe"},
+"cobblestone,cobblestone,cobblestone,air,stick,air,air,stick":{name:"stonePickaxe"},
 "ironIngot,ironIngot,ironIngot,air,stick,air,air,stick":{name:"ironPickaxe"},
 "goldIngot,goldIngot,goldIngot,air,stick,air,air,stick":{name:"goldenPickaxe"},
 "diamond,diamond,diamond,air,stick,air,air,stick":{name:"diamondPickaxe"},
@@ -9372,7 +9382,10 @@ const crafts = {
 "cobblestone,cobblestone,cobblestone,redstone,redstone,quartz,cobblestone,cobblestone,cobblestone":{name:"observer"},
 "string,string,air,string,string": {name:"whiteWool"},
 "poppy": {name:"redDye", shapeless: true},
+"sunflower": {name:"yellowDye", shapeless: true,amount:2},
+"dandelion": {name:"yellowDye", shapeless: true},
 "whiteWool,redDye": {name:"redWool", shapeless:true},
+"whiteWool,yellowDye": {name:"yellowWool", shapeless:true},
 }
 /*
 //replace anything in crafts starting with _
@@ -19242,7 +19255,7 @@ let y = (rnd >> 4 & 15) + this.y
 let z = (rnd & 15) + this.z
 var above = world.getBlock(x,y+1,z)
 if(blockData[above].cactusFruit){
-if(world.getBlock(x,y+2,z)) return //the cactus fruit can't replace blocks
+if(world.getBlock(x,y+2,z) || world.getBlock(x, y-2, z) === blockIds.cactus) return //the cactus fruit can't replace blocks, and can't grow more than 3 cacti.
 world.setBlock(x,y+2,z, above) //move the cactus fruit up
 }else if(above) return //there is a block so it can't grow
 world.setBlock(x,y+1,z, blockIds.cactus|CACTUS)
@@ -19774,6 +19787,7 @@ for (let j = ground + 1; j <= top; j++) {
 this.setBlock(i, j, k, tree);
 }
 this.setBlock(i, ground, k, blockIds.sand);
+this.setBlock(i, ground-1, k, blockIds.Lava);
 //Fruit
 switch(round(rnd*4)){
 case 0:
@@ -20210,6 +20224,14 @@ let y = random(10, 177)
 let z = random(0, 16)
 if(world.getBlock(wx+x,y,wz+z) === blockIds.netherrack && world.getBlock(wx+x,y+1,wz+z) === blockIds.netherrack && world.getBlock(wx+x,y-1,wz+z) === blockIds.netherrack){
 world.setBlock(wx+x,y,wz+z, blockIds.netherGoldOre)
+}
+}
+for(l=0; l<3; l++){
+let x = random(0, 16)
+let y = random(5, 12)
+let z = random(0, 16)
+if(world.getBlock(wx+x,y,wz+z) === blockIds.netherrack && world.getBlock(wx+x,y+1,wz+z) === blockIds.netherrack && world.getBlock(wx+x,y-1,wz+z) === blockIds.netherrack){
+world.setBlock(wx+x,y,wz+z, blockIds.ancientDebris)
 }
 }
 }else{
@@ -23684,8 +23706,7 @@ chunk.setBlock(i, gen - 3, k, blockIds.dirt)
 }
 } else if(superflat){
 chunk.tops[k * 16 + i] = gen;
-chunk.setBlock(i, gen, k, blockIds.grass);
-chunk.setBlock(i, gen - 1, k, blockIds.dirt);
+chunk.setBlock(i, gen - 1, k, blockIds.grass);
 chunk.setBlock(i, gen - 2, k, blockIds.dirt);
 chunk.setBlock(i, gen - 3, k, blockIds.dirt);
 }else{
