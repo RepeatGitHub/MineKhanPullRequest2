@@ -4096,12 +4096,7 @@ damage:4,
 burnPlayer:true,
 dieMessage: () => username+" tried to swim in lava.",
 shadow: false,
-blastResistance:100,
-onupdate:function(x,y,z,b){
-if (world.getBlock(x,y+1,z) === blockIds.Water) {
-world.setBlock(x,y,z,blockIds.obsidian)
-}
-}
+blastResistance:100
 },
 {
 name: "craftingTable",
@@ -7413,7 +7408,10 @@ solid: false,
 transparent: true,
 shadow: false,
 crossShape: true,
-cactusFruit:true
+cactusFruit:true,
+onupdate:function(x,y,z,b,world){
+needsSupportingBlocks(x,y,z,b,world)
+}
 },
 {
 name:"greenCactusFruit",
@@ -7422,7 +7420,10 @@ solid: false,
 transparent: true,
 shadow: false,
 crossShape: true,
-cactusFruit:true
+cactusFruit:true,
+onupdate:function(x,y,z,b,world){
+needsSupportingBlocks(x,y,z,b,world)
+}
 },
 {
 name:"redCactusFruit",
@@ -7435,7 +7436,10 @@ edible: true,
 eatWhenFull: false,
 food: 2,
 saturation: 1,
-cactusFruit:true
+cactusFruit:true,
+onupdate:function(x,y,z,b,world){
+needsSupportingBlocks(x,y,z,b,world)
+}
 },
 {
 name:"purpleCactusFruit",
@@ -7448,7 +7452,10 @@ edible: true,
 eatWhenFull: false,
 food: 3,
 saturation: 2,
-cactusFruit:true
+cactusFruit:true,
+onupdate:function(x,y,z,b,world){
+needsSupportingBlocks(x,y,z,b,world)
+}
 },
 {
 name:"cherry",
