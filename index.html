@@ -6718,7 +6718,7 @@ if(rand() > 0.8){
 let r = floor(rand(3))
 if(r === 0) return "stick"
 else if(r === 1) return "birchSapling"
-else return "apple"
+else return "string"
 }
 },
 dropSelfWhenSheared:true,
@@ -6734,10 +6734,11 @@ breakTime: 0.3,
 type:"plant2",
 drop: function(){
 if(rand() > 0.8){
-let r = floor(rand(3))
+let r = floor(rand(4))
 if(r === 0) return "stick"
 else if(r === 1) return "darkOakSapling"
-else return "apple"
+else if(r === 2) return "brownMushroom"
+else return "redMushroom"
 }
 },
 dropSelfWhenSheared:true,
@@ -6764,7 +6765,7 @@ if(rand() > 0.8){
 let r = floor(rand(3))
 if(r === 0) return "stick"
 else if(r === 1) return "jungleSapling"
-else return "apple"
+else return "vine"
 }
 },
 dropSelfWhenSheared:true,
@@ -6791,7 +6792,7 @@ if(rand() > 0.8){
 let r = floor(rand(3))
 if(r === 0) return "stick"
 else if(r === 1) return "spruceSapling"
-else return "apple"
+else return "snowball"
 }
 },
 dropSelfWhenSheared:true,
@@ -7408,10 +7409,7 @@ solid: false,
 transparent: true,
 shadow: false,
 crossShape: true,
-cactusFruit:true,
-onupdate:function(x,y,z,b,world){
-needsSupportingBlocks(x,y,z,b,world)
-}
+cactusFruit:true
 },
 {
 name:"greenCactusFruit",
@@ -7420,10 +7418,7 @@ solid: false,
 transparent: true,
 shadow: false,
 crossShape: true,
-cactusFruit:true,
-onupdate:function(x,y,z,b,world){
-needsSupportingBlocks(x,y,z,b,world)
-}
+cactusFruit:true
 },
 {
 name:"redCactusFruit",
@@ -7436,10 +7431,7 @@ edible: true,
 eatWhenFull: false,
 food: 2,
 saturation: 1,
-cactusFruit:true,
-onupdate:function(x,y,z,b,world){
-needsSupportingBlocks(x,y,z,b,world)
-}
+cactusFruit:true
 },
 {
 name:"purpleCactusFruit",
@@ -7452,10 +7444,7 @@ edible: true,
 eatWhenFull: false,
 food: 3,
 saturation: 2,
-cactusFruit:true,
-onupdate:function(x,y,z,b,world){
-needsSupportingBlocks(x,y,z,b,world)
-}
+cactusFruit:true
 },
 {
 name:"cherry",
