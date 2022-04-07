@@ -4096,7 +4096,12 @@ damage:4,
 burnPlayer:true,
 dieMessage: () => username+" tried to swim in lava.",
 shadow: false,
-blastResistance:100
+blastResistance:100,
+onupdate:function(x,y,z,b){
+if (world.getBlock(x,y+1,z) === blockIds.Water) {
+world.setBlock(x,y,z,blockIds.obsidian)
+}
+}
 },
 {
 name: "craftingTable",
