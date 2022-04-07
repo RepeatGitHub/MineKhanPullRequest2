@@ -6716,7 +6716,7 @@ type:"plant2",
 drop: function(){
 if(rand() > 0.8){
 let r = floor(rand(3))
-if(r === 0) return "stick"
+if(r === 0) return "string"
 else if(r === 1) return "birchSapling"
 else return "string"
 }
@@ -9383,6 +9383,8 @@ const crafts = {
 "cobblestone,cobblestone,cobblestone,redstone,redstone,quartz,cobblestone,cobblestone,cobblestone":{name:"observer"},
 "string,string,air,string,string": {name:"whiteWool"},
 "poppy": {name:"redDye", shapeless: true},
+"redTulip": {name:"redDye", shapeless: true},
+"roseBush": {name:"redDye", shapeless: true,amount:2},
 "sunflower": {name:"yellowDye", shapeless: true,amount:2},
 "dandelion": {name:"yellowDye", shapeless: true},
 "whiteWool,redDye": {name:"redWool", shapeless:true},
